@@ -23,7 +23,7 @@
 #include "xsens_mtw/MtwCallback.h"
 #include "xsens_mtw/Synchronizer.h"
 #include "xsens_mtw/WirelessMasterCallback.h"
-
+#include "/usr/local/xsens/include/xstypes/xstime.h"
 #define BASH_MSG_RESET "\033[0m"
 #define BASH_MSG_GREEN "\033[32m"
 
@@ -45,8 +45,8 @@ namespace hiros {
                                                                            {XSL_Out2, "XSL_Out2"}};
 
     static const std::map<std::string, XsSyncFunction> sync_function_map = {
-      {"XSF_StartRecording", XSF_StartRecording},
-      {"XSF_StopRecording", XSF_StopRecording},
+      {"XSF_StartRecording", XSF_StartRecordingIn},
+      {"XSF_StopRecording", XSF_StopRecordingIn},
       {"XSF_ResetTimer", XSF_ResetTimer},
       {"XSF_TriggerIndication", XSF_TriggerIndication},
       {"XSF_IntervalTransitionMeasurement", XSF_IntervalTransitionMeasurement},
@@ -158,6 +158,7 @@ namespace hiros {
 
       std_msgs::Header getHeader(std::shared_ptr<XsDataPacket> packet) const;
       sensor_msgs::Imu getImuMsg(std::shared_ptr<XsDataPacket> packet) const;
+      geometry_msgs::Vector3Stamped getAngularVel(std::shared_ptr<XsDataPacket> packet) const;
       sensor_msgs::MagneticField getMagMsg(std::shared_ptr<XsDataPacket> packet) const;
       hiros_xsens_mtw_wrapper::Euler getEulerMsg(std::shared_ptr<XsDataPacket> packet) const;
       geometry_msgs::Vector3Stamped getFreeAccelerationMsg(std::shared_ptr<XsDataPacket> packet) const;
@@ -213,6 +214,7 @@ namespace hiros {
       std::map<XsDeviceId, ros::Publisher> imu_pubs_;
       std::map<XsDeviceId, ros::Publisher> mag_pubs_;
       std::map<XsDeviceId, ros::Publisher> euler_pubs_;
+      std::map<XsDeviceId, ros::Publisher> ori_vel_pubs_;
       std::map<XsDeviceId, ros::Publisher> free_acceleration_pubs_;
       std::map<XsDeviceId, ros::Publisher> pressure_pubs_;
       tf2_ros::TransformBroadcaster tf_broadcaster_;

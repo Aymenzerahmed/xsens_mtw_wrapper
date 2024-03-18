@@ -6,7 +6,8 @@
 #include <memory>
 
 // Xsens dependencies
-#include "xsensdeviceapi.h"
+#include "/usr/local/xsens/include/xsensdeviceapi.h"
+#include "/usr/local/xsens/examples/mtsdk/xda_cpp/xsmutex.h"
 
 namespace hiros {
   namespace xsens_mtw {

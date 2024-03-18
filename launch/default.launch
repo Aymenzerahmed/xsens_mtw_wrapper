@@ -3,10 +3,10 @@
 <launch>
   <arg name="node_required"             default="false"               />
   <arg name="node_name"                 default="xsens_mtw"           />
-  <arg name="tf_prefix"                 default=""                    />
+  <arg name="tf_prefix"                 default="/imu_tf"                    />
   <arg name="number_of_mtws"            default="0"                   />
 
-  <arg name="desired_update_rate"       default="100"                 />
+  <arg name="desired_update_rate"       default="120"                 />
   <arg name="desired_radio_channel"     default="19"                  />
   <arg name="fixed_latency"             default="0.030"               />
 

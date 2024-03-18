@@ -2,8 +2,9 @@
 #define hiros_xsens_mtw_wirelessMasterCallback_h
 
 // Xsens dependencies
-#include "xsensdeviceapi.h"
-
+#include "/usr/local/xsens/include/xsensdeviceapi.h"
+#include "/usr/local/xsens/examples/mtsdk/xda_cpp/xsmutex.h"
+#include "/usr/local/xsens/include/xstypes/xstime.h"
 // Internal dependencies
 #include "xsens_mtw/utils.h"
 

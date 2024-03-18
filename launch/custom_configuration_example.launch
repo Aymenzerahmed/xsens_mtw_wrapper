@@ -2,9 +2,9 @@
 
 <launch>
   <include file="$(find hiros_xsens_mtw_wrapper)/launch/default.launch">
-    <arg name="node_required"             value="true"                />
+    <!-- <arg name="node_required"             value="true"                />
     <arg name="node_name"                 value="xsens_node_01"       />
-
+    <arg name="tf_prefix"                 value="/imu_tf"                    />
     <arg name="number_of_mtws"            value="6"                   />
     <arg name="desired_update_rate"       value="120"                 />
 
@@ -18,8 +18,8 @@
     <arg name="publish_imu"               value="true"                />
     <arg name="publish_mag"               value="true"                />
     <arg name="publish_euler"             value="true"                />
-    <arg name="publish_free_acceleration" value="false"               />
+    <arg name="publish_free_acceleration" value="true"               />
     <arg name="publish_pressure"          value="false"               />
-    <arg name="publish_tf"                value="true"                />
+    <arg name="publish_tf"                value="true"                /> -->
   </include>
 </launch>

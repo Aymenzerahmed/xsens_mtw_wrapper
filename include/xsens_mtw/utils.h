@@ -10,7 +10,7 @@
 #include "tf2/LinearMath/Vector3.h"
 
 // Xsens dependencies
-#include "xsensdeviceapi.h"
+#include "/usr/local/xsens/include/xsensdeviceapi.h"
 
 namespace hiros {
   namespace xsens_mtw {

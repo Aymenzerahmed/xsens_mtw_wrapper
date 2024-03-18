@@ -317,6 +317,11 @@ void hiros::xsens_mtw::Wrapper::stopWrapper()
           pub.second.shutdown();
         }
       }
+      for (auto& pub : ori_vel_pubs_) {
+        if (pub.second) {
+          pub.second.shutdown();
+        }
+      }
     }
 
     if (wrapper_params_.publish_free_acceleration) {
@@ -619,6 +624,9 @@ void hiros::xsens_mtw::Wrapper::setupRos()
         euler_pubs_.emplace(device.first,
                             nh_.advertise<hiros_xsens_mtw_wrapper::Euler>(
                               composeTopicPrefix(device.first) + "/filter/euler", ros_topic_queue_size_));
+        ori_vel_pubs_.emplace(device.first,
+                              nh_.advertise<hiros_xsens_mtw_wrapper::Euler>(
+                              composeTopicPrefix(device.first) + "/filter/angular_velocity",ros_topic_queue_size_));
       }
 
       if (wrapper_params_.publish_free_acceleration) {
@@ -747,6 +755,7 @@ void hiros::xsens_mtw::Wrapper::publishPacket(std::shared_ptr<XsDataPacket> pack
 
   if (wrapper_params_.publish_euler && packet->containsOrientation()) {
     euler_pubs_.at(packet->deviceId()).publish(getEulerMsg(packet));
+    ori_vel_pubs_.at(packet->deviceId()).publish(getAngularVel(packet));
   }
 
   if (wrapper_params_.publish_free_acceleration && packet->containsFreeAcceleration()) {
@@ -821,6 +830,18 @@ sensor_msgs::Imu hiros::xsens_mtw::Wrapper::getImuMsg(std::shared_ptr<XsDataPack
 
   return out_msg;
 }
+geometry_msgs::Vector3Stamped hiros::xsens_mtw::Wrapper::getAngularVel(std::shared_ptr<XsDataPacket> packet) const
+{
+  geometry_msgs::Vector3Stamped out_msg;
+  out_msg.header = getHeader(packet);
+
+  out_msg.vector.x = packet->calibratedGyroscopeData().at(0);
+  out_msg.vector.y = packet->calibratedGyroscopeData().at(1);
+  out_msg.vector.z = packet->calibratedGyroscopeData().at(2);
+
+  return out_msg;
+}
+
 
 sensor_msgs::MagneticField hiros::xsens_mtw::Wrapper::getMagMsg(std::shared_ptr<XsDataPacket> t_packet) const
 {

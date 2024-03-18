@@ -9,7 +9,7 @@
 #include "ros/ros.h"
 
 // Xsens dependencies
-#include "xsensdeviceapi.h"
+#include "/usr/local/xsens/include/xsensdeviceapi.h"
 
 // Internal dependencies
 #include "xsens_mtw/MtwCallback.h"
