@@ -625,7 +625,7 @@ void hiros::xsens_mtw::Wrapper::setupRos()
                             nh_.advertise<hiros_xsens_mtw_wrapper::Euler>(
                               composeTopicPrefix(device.first) + "/filter/euler", ros_topic_queue_size_));
         ori_vel_pubs_.emplace(device.first,
-                              nh_.advertise<hiros_xsens_mtw_wrapper::Euler>(
+                              nh_.advertise<geometry_msgs::Vector3Stamped>(
                               composeTopicPrefix(device.first) + "/filter/angular_velocity",ros_topic_queue_size_));
       }
 
